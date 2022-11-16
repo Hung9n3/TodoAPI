@@ -41,6 +41,11 @@ namespace TodoApi.Controllers
                 return CreatedAtAction(nameof(Register),user.Id);
             }
         }
+        [HttpGet]
+        public IActionResult Hello()
+        {
+            return Ok();
+        }
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(int id)
         {
