@@ -49,7 +49,7 @@ namespace TodoApi.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(int id)
         {
-            var user = await _todoContext.Users.Include(x => x.Calendar).FirstOrDefaultAsync(x => x.Id == id);
+            var user = await _todoContext.Users.Include(x => x.Calendar).ThenInclude(x => x.Works).FirstOrDefaultAsync(x => x.Id == id);
             if(user!=null) return Ok(user);
             else return NotFound("Not Found user");
         }
