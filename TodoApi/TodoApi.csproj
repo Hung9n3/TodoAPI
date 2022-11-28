@@ -22,7 +22,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\TodoApi.Core\TodoApi.Core.csproj" />
+    <ProjectReference Include="..\Contracts\Contracts.csproj" />
+    <ProjectReference Include="..\TodoApi.ProcessingProvider\TodoApi.ProcessingProvider.csproj" />
   </ItemGroup>
 
 </Project>

@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Runtime.CompilerServices;
 using TodoApi.Core.Database;
 using TodoApi.Core.Entities;
-using TodoApi.DTOs;
+using TodoApi.DataObjects;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 

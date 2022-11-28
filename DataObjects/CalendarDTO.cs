@@ -1,6 +1,6 @@
 ﻿using TodoApi.Core.Entities;
 
-namespace TodoApi.DTOs
+namespace TodoApi.DataObjects
 {
     public class CalendarDTO : BaseDTO
     {

@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using TodoApi.Core.Database;
 using TodoApi.Core.Entities;
-using TodoApi.DTOs;
+using TodoApi.DataObjects;
 
 namespace TodoApi.Helpers.Data
 {

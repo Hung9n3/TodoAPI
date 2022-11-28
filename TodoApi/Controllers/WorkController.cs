@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Contracts.ProcessingProviders;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using TodoApi.DTOs;
+using TodoApi.DataObjects;
 using TodoApi.Helpers.Data;
+
 
 namespace TodoApi.Controllers
 {
@@ -10,46 +12,43 @@ namespace TodoApi.Controllers
     public class WorkController : ControllerBase
     {
         private readonly WorkDataHelpers _workDataHelpers;
-        public WorkController( WorkDataHelpers workDataHelpers)
+        private readonly IWorkProcessingProvider _workProcessingProvider;
+        public WorkController( WorkDataHelpers workDataHelpers, IWorkProcessingProvider workProcessingProvider)
         {
             _workDataHelpers = workDataHelpers;
+            _workProcessingProvider = workProcessingProvider;
         }
         [HttpGet]
-        public async Task<IActionResult> Get()
+        public async Task<IActionResult> Get(CancellationToken cancellationToken = default)
         {
-            return Ok(await _workDataHelpers.FindAll());
+            return Ok(await _workProcessingProvider.FindAll(cancellationToken));
         }
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(int id)
         {
-            return Ok(await _workDataHelpers.FindByIdAsync(id));
+            return Ok(await _workProcessingProvider.FindByIdAsync(id));
         }
         [HttpGet("{userid}")]
         public async Task<IActionResult> GetByUser(int userid)
         {
-            return Ok(await _workDataHelpers.FindByUser(userid));
+            return Ok(await _workProcessingProvider.FindByUser(userid));
         }
         [HttpPost]
         public async Task<IActionResult> Create(WorkDTO dto)
         {
-            await _workDataHelpers.Create(dto);
-            await _workDataHelpers.SaveAsync();
+            await _workProcessingProvider.Add(dto);
             return Ok();
         }
         [HttpPut]
         public async Task<IActionResult> Update(WorkDTO dto)
         {
-            await _workDataHelpers.Update(dto);
-            await _workDataHelpers.SaveAsync();
-
+            await _workProcessingProvider.Update(dto);
             return Ok();
         }
         [HttpDelete]
         public async Task<IActionResult> Delete(WorkDTO dto)
         {
-            await _workDataHelpers.Delete(dto.Id);
-            await _workDataHelpers.SaveAsync();
-
+            await _workProcessingProvider.Delete(dto.Id);
             return Ok();
         }
     }

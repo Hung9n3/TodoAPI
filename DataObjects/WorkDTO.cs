@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace TodoApi.DTOs
+namespace TodoApi.DataObjects
 {
     public class WorkDTO : BaseDTO
     {

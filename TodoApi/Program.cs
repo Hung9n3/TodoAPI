@@ -1,16 +1,26 @@
 using AutoMapper;
+using Contracts.DataProviders;
+using Contracts.ProcessingProviders;
 using Microsoft.EntityFrameworkCore;
 using TodoApi.Core.Database;
-using TodoApi.DTOs.Mapping;
+using TodoApi.Core.Entities;
+using TodoApi.DataObjects.Mapping;
+using TodoApi.DataProviders;
 using TodoApi.Helpers.Data;
+using TodoApi.ProcessingProvider;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<TodoContext>(options => options.UseSqlServer
-                                                (builder.Configuration.GetConnectionString("DefaultConnection")));
+                                                (builder.Configuration.GetConnectionString("DefaultConnection")), ServiceLifetime.Scoped);
 // Add services to the container.
 builder.Services.AddTransient<WorkDataHelpers>();
 
+//Data Provider
+builder.Services.AddScoped<IBaseDataProvider<Work>,BaseDataProvider<Work>>(); 
+builder.Services.AddScoped<IWorkDataProvider, WorkDataProvider>();
+//ProcessingProvider
+builder.Services.AddScoped<IWorkProcessingProvider, WorkProcessingProvider>();
 
 var mapperConfig = new MapperConfiguration(mc => mc.AddProfile(new MappingProfile()));
 IMapper mapper = mapperConfig.CreateMapper();

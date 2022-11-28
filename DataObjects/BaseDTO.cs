@@ -1,4 +1,4 @@
-﻿namespace TodoApi.DTOs
+﻿namespace TodoApi.DataObjects
 {
     public abstract class BaseDTO
     {

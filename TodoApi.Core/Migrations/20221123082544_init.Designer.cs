@@ -12,8 +12,8 @@ using TodoApi.Core.Database;
 namespace TodoApi.Core.Migrations
 {
     [DbContext(typeof(TodoContext))]
-    [Migration("20221115100537_edit relationship")]
-    partial class editrelationship
+    [Migration("20221123082544_init")]
+    partial class init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
