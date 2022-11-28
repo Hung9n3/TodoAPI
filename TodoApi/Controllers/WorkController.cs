@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TodoApi.DataObjects;
-using TodoApi.Helpers.Data;
 
 
 namespace TodoApi.Controllers
@@ -11,11 +10,9 @@ namespace TodoApi.Controllers
     [ApiController]
     public class WorkController : ControllerBase
     {
-        private readonly WorkDataHelpers _workDataHelpers;
         private readonly IWorkProcessingProvider _workProcessingProvider;
-        public WorkController( WorkDataHelpers workDataHelpers, IWorkProcessingProvider workProcessingProvider)
+        public WorkController( IWorkProcessingProvider workProcessingProvider)
         {
-            _workDataHelpers = workDataHelpers;
             _workProcessingProvider = workProcessingProvider;
         }
         [HttpGet]

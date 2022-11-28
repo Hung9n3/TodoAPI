@@ -26,4 +26,8 @@
     <ProjectReference Include="..\TodoApi.ProcessingProvider\TodoApi.ProcessingProvider.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Helpers\" />
+  </ItemGroup>
+
 </Project>
