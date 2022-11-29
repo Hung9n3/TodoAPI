@@ -11,17 +11,15 @@ using TodoApi.DataObjects;
 
 namespace TodoApi.ProcessingProvider
 {
-    public class WorkProcessingProvider : BaseProcessingProvider<Work, WorkDTO>, IWorkProcessingProvider
+    public class WorkProcessingProvider : BaseProcessingProvider<Work, WorkDTO, IWorkDataProvider>, IWorkProcessingProvider
     {
-        protected IWorkDataProvider _workDataProvider;
-        public WorkProcessingProvider(IBaseDataProvider<Work> dataProvider, IMapper mapper, IWorkDataProvider workDataProvider) : base(dataProvider, mapper)
+        public WorkProcessingProvider(IWorkDataProvider dataProvider, IMapper mapper) : base(dataProvider, mapper)
         {
-            _workDataProvider = workDataProvider;
         }
 
         public async Task<List<WorkDTO>> FindByUser(int userId)
         {
-            return MapToListDTO(await _workDataProvider.GetWorksByUser(userId));
+            return MapToListDTO(await _dataProvider.GetWorksByUser(userId));
         }
     }
 }

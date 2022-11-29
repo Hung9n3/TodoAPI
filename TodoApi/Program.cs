@@ -6,19 +6,18 @@ using TodoApi.Core.Database;
 using TodoApi.Core.Entities;
 using TodoApi.DataObjects.Mapping;
 using TodoApi.DataProviders;
+using TodoApi.DataProviders.Extensions;
 using TodoApi.ProcessingProvider;
+using TodoApi.ProcessingProvider.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<TodoContext>(options => options.UseSqlServer
-                                                (builder.Configuration.GetConnectionString("DefaultConnection")), ServiceLifetime.Scoped);
-// Add services to the container.
+                                               (builder.Configuration.GetConnectionString("DefaultConnection")),
+                                              ServiceLifetime.Scoped);
 
-//Data Provider
-builder.Services.AddScoped<IBaseDataProvider<Work>,BaseDataProvider<Work>>(); 
-builder.Services.AddScoped<IWorkDataProvider, WorkDataProvider>();
-//ProcessingProvider
-builder.Services.AddScoped<IWorkProcessingProvider, WorkProcessingProvider>();
+builder.Services.AddDataService();
+builder.Services.AddProcessingService();
 
 var mapperConfig = new MapperConfiguration(mc => mc.AddProfile(new MappingProfile()));
 IMapper mapper = mapperConfig.CreateMapper();

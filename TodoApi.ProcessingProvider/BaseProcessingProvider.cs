@@ -13,11 +13,11 @@ using TodoApi.DataObjects;
 
 namespace TodoApi.ProcessingProvider
 {
-    public class BaseProcessingProvider<E, D> : IBaseProcessingProvider<E, D> where E : BaseEntity where D : BaseDTO
+    public class BaseProcessingProvider<E, D, EDataProvider> : IBaseProcessingProvider<E, D> where E : BaseEntity where D : BaseDTO where EDataProvider : IBaseDataProvider<E>
     {
-        protected IBaseDataProvider<E> _dataProvider;
+        protected EDataProvider _dataProvider;
         protected IMapper _mapper;
-        public BaseProcessingProvider(IBaseDataProvider<E> dataProvider, IMapper mapper)
+        public BaseProcessingProvider(EDataProvider dataProvider, IMapper mapper)
         {
             _dataProvider = dataProvider;
             _mapper = mapper;
